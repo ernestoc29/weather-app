@@ -5,6 +5,7 @@ export function processWeatherData(data) {
     conditions: data.currentConditions.conditions,
     feelsLike: data.currentConditions.feelslike,
     humidity: data.currentConditions.humidity,
+    icon: data.currentConditions.icon,
   };
 }
 
