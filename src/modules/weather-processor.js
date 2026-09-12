@@ -7,6 +7,9 @@ export function processWeatherData(data) {
     conditions: data.currentConditions.conditions,
     feelsLike: data.currentConditions.feelslike,
     humidity: data.currentConditions.humidity,
+    precipitation: data.currentConditions.precip,
+    pressure: data.currentConditions.pressure,
+    wind: data.currentConditions.windspeed,
     icon: getWeatherIcon(data.currentConditions.icon),
     forecast: processForecast(data.days),
   };
