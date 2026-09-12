@@ -6,7 +6,7 @@ import "./styles/styles.css";
 const userInput = document.querySelector("input");
 const searchBtn = document.querySelector(".search");
 
-searchBtn.addEventListener("click", async () => {
+async function fetchData() {
   if (!userInput.value.trim()) return;
 
   clearDisplays();
@@ -18,4 +18,12 @@ searchBtn.addEventListener("click", async () => {
   } catch (error) {
     renderError(error.message);
   }
+}
+
+userInput.addEventListener("keydown", async (e) => {
+  if (e.key === "Enter") {
+    await fetchData();
+  }
 });
+
+searchBtn.addEventListener("click", fetchData);
