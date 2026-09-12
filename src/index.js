@@ -4,6 +4,8 @@ import {
   renderError,
   clearDisplays,
   renderForecast,
+  showEmptyState,
+  hideEmptyState
 } from "./modules/dom.js";
 import {
   convertUnit,
@@ -26,6 +28,7 @@ async function fetchData() {
   switchBtn.textContent = "C";
 
   clearDisplays();
+  hideEmptyState()
 
   try {
     const data = await apiCall.getWeather(userInput.value);
@@ -40,6 +43,7 @@ async function fetchData() {
     return weather;
   } catch (error) {
     renderError(error.message);
+    showEmptyState()
   }
 }
 
@@ -80,3 +84,5 @@ switchBtn.addEventListener("click", () => {
   renderWeather(displayWeather);
   renderForecast(displayWeather.forecast);
 });
+
+showEmptyState();

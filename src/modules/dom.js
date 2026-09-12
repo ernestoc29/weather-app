@@ -96,3 +96,23 @@ export function renderForecast(forecast) {
     forecastDiv.appendChild(div);
   });
 }
+
+export function showEmptyState() {
+  const emptyState = document.querySelector(".empty-state");
+  const currentRow = document.querySelector(".current-row");
+  const forecastDiv = document.querySelector(".forecast");
+
+  emptyState.classList.remove("hidden");
+  currentRow.classList.add("hidden");
+  forecastDiv.classList.add("hidden");
+}
+
+export function hideEmptyState() {
+  const emptyState = document.querySelector(".empty-state");
+  const currentRow = document.querySelector(".current-row");
+  const forecastDiv = document.querySelector(".forecast");
+
+  emptyState.classList.add("hidden");
+  currentRow.classList.remove("hidden");
+  forecastDiv.classList.remove("hidden");
+}
