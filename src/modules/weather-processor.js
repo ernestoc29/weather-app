@@ -7,3 +7,8 @@ export function processWeatherData(data) {
     humidity: data.currentConditions.humidity,
   };
 }
+
+export function convertUnit(temp) {
+  const celsius = (temp - 32) * (5 / 9);
+  return Number(celsius.toFixed(1));
+}
