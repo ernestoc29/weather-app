@@ -4,22 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div id="content">
-      <input type="text" placeholder="Enter Location" />
-      <button class="search">Search</button>
-      <button class="switch">C</button>
-      <p class="error"></p>
+      <div class="button-container">
+        <input type="text" placeholder="Enter Location" />
+        <button class="search">Search</button>
+        <button class="switch">C</button>
+        <p class="error"></p>
+      </div>
 
-      <div class="weather-display">
-        <p class="location"></p>
-        <span class="weather-icon"></span>
-        <p class="conditions"></p>
-        <p class="temp"></p>
-        <p class="feels-like"></p>
-        <p class="humidity"></p>
+      <div class="current-row">
+        <div class="weather-display">
+          <div class="left">
+            <p class="location"></p>
+            <p class="temp"></p>
+          </div>
+
+          <div class="right">
+            <span class="weather-icon"></span>
+            <p class="conditions"></p>
+            <p class="feels-like"></p>
+            <p class="humidity"></p>
+          </div>
+        </div>
+
+        <div class="detail-rail">
+          <div class="detail-card">
+            <div class="detail-text">
+              <p class="detail-label">Precipitation</p>
+              <p class="precipitation"></p>
+            </div>
+            <span class="detail-icon">🌧️</span>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-text">
+              <p class="detail-label">Pressure</p>
+              <p class="pressure"></p>
+            </div>
+            <span class="detail-icon">📊</span>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-text">
+              <p class="detail-label">Wind</p>
+              <p class="wind"></p>
+            </div>
+            <span class="detail-icon">💨</span>
+          </div>
+        </div>
       </div>
 
       <div class="forecast"></div>

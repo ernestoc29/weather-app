@@ -5,13 +5,19 @@ export function renderWeather(data) {
   const tempDisplay = document.querySelector(".temp");
   const feelsLikeDisplay = document.querySelector(".feels-like");
   const humidityDisplay = document.querySelector(".humidity");
+  const precipitationDisplay = document.querySelector(".precipitation");
+  const pressureDisplay = document.querySelector(".pressure");
+  const windDisplay = document.querySelector(".wind");
 
   locationDisplay.textContent = data.location;
   iconDisplay.textContent = data.icon;
   conditionsDisplay.textContent = data.conditions;
-  tempDisplay.textContent = `Temperature: ${data.temperature}°`;
+  tempDisplay.textContent = `${data.temperature}°`;
   feelsLikeDisplay.textContent = `Feels Like: ${data.feelsLike}°`;
   humidityDisplay.textContent = `Humidity: ${data.humidity}%`;
+  precipitationDisplay.textContent = `${data.precipitation} inches`;
+  pressureDisplay.textContent = `${data.pressure} inHg`;
+  windDisplay.textContent = `${data.wind} mph`;
 }
 
 export function renderError(message) {
@@ -27,7 +33,10 @@ export function clearDisplays() {
   const tempDisplay = document.querySelector(".temp");
   const feelsLikeDisplay = document.querySelector(".feels-like");
   const humidityDisplay = document.querySelector(".humidity");
-  const forecastDiv = document.querySelector(".forecast")
+  const forecastDiv = document.querySelector(".forecast");
+  const precipitationDisplay = document.querySelector(".precipitation");
+  const pressureDisplay = document.querySelector(".pressure");
+  const windDisplay = document.querySelector(".wind");
 
   errorDisplay.textContent = "";
   locationDisplay.textContent = "";
@@ -37,6 +46,9 @@ export function clearDisplays() {
   feelsLikeDisplay.textContent = "";
   humidityDisplay.textContent = "";
   forecastDiv.textContent = "";
+  precipitationDisplay.textContent = "";
+  pressureDisplay.textContent = "";
+  windDisplay.textContent = "";
 }
 
 export function renderForecast(forecast) {
@@ -62,7 +74,7 @@ export function renderForecast(forecast) {
 
     const highDisplay = document.createElement("p");
     highDisplay.classList.add("forecast-high");
-    highDisplay.textContent =  `High: ${day.high}°`
+    highDisplay.textContent = `High: ${day.high}°`;
 
     const lowDisplay = document.createElement("p");
     lowDisplay.classList.add("forecast-low");
@@ -73,8 +85,8 @@ export function renderForecast(forecast) {
     conditionsDisplay.textContent = day.conditions;
 
     div.append(
-      dateDisplay,
       dayOfWeekDisplay,
+      dateDisplay,
       iconDisplay,
       highDisplay,
       lowDisplay,
