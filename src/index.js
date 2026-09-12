@@ -1,5 +1,10 @@
 import { apiCall } from "./modules/api.js";
-import { renderWeather, renderError, clearDisplays } from "./modules/dom.js";
+import {
+  renderWeather,
+  renderError,
+  clearDisplays,
+  renderForecast,
+} from "./modules/dom.js";
 import {
   convertUnit,
   processWeatherData,
@@ -15,19 +20,23 @@ const searchBtn = document.querySelector(".search");
 const switchBtn = document.querySelector(".switch");
 
 async function fetchData() {
-  currentUnit = "f";
-  switchBtn.textContent = "C"; 
-
   if (!userInput.value.trim()) return;
+
+  currentUnit = "f";
+  switchBtn.textContent = "C";
 
   clearDisplays();
 
   try {
     const data = await apiCall.getWeather(userInput.value);
     const weather = processWeatherData(data);
-    currentWeather = { ...weather };
+    currentWeather = weather;
+
     renderWeather(weather);
-    console.log(weather)
+    renderForecast(weather.forecast);
+
+    console.log(weather);
+
     return weather;
   } catch (error) {
     renderError(error.message);
@@ -43,20 +52,31 @@ userInput.addEventListener("keydown", async (e) => {
 searchBtn.addEventListener("click", fetchData);
 
 switchBtn.addEventListener("click", () => {
-  if (currentUnit === "f") {
-    const displayWeather = { ...currentWeather };
-    const tempC = convertUnit(currentWeather.temperature);
-    const feelsLikeC = convertUnit(currentWeather.feelsLike);
+  if (!currentWeather) return;
 
-    displayWeather.temperature = tempC;
-    displayWeather.feelsLike = feelsLikeC;
+  let displayWeather;
+
+  if (currentUnit === "f") {
+    displayWeather = { ...currentWeather };
+
+    displayWeather.temperature = convertUnit(currentWeather.temperature);
+    displayWeather.feelsLike = convertUnit(currentWeather.feelsLike);
+
+    displayWeather.forecast = currentWeather.forecast.map((day) => ({
+      ...day,
+      high: convertUnit(day.high),
+      low: convertUnit(day.low),
+    }));
 
     switchBtn.textContent = "F";
     currentUnit = "c";
-    renderWeather(displayWeather);
   } else {
+    displayWeather = currentWeather;
+
     switchBtn.textContent = "C";
     currentUnit = "f";
-    renderWeather(currentWeather);
   }
+
+  renderWeather(displayWeather);
+  renderForecast(displayWeather.forecast);
 });
