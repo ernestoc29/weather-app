@@ -1,11 +1,14 @@
+import { format, parseISO } from "date-fns";
+
 export function processWeatherData(data) {
   return {
-    location: data.address,
+    location: data.resolvedAddress,
     temperature: data.currentConditions.temp,
     conditions: data.currentConditions.conditions,
     feelsLike: data.currentConditions.feelslike,
     humidity: data.currentConditions.humidity,
     icon: getWeatherIcon(data.currentConditions.icon),
+    forecast: processForecast(data.days),
   };
 }
 
@@ -49,4 +52,19 @@ function getWeatherIcon(icon) {
   };
 
   return icons[icon] || "🌡️";
+}
+
+function processForecast(days) {
+  return days.slice(0, 7).map((day) => {
+    const date = parseISO(day.datetime);
+
+    return {
+      date: format(date, "PP"),
+      dayOfWeek: format(date, "EEEE"),
+      high: day.tempmax,
+      low: day.tempmin,
+      conditions: day.conditions,
+      icon: getWeatherIcon(day.icon),
+    };
+  });
 }
